@@ -40,7 +40,10 @@ sub setup {
 sub _get_node {
     my($c,$mode,$key,$ci)=@_;
     
-    my $res = $c->config->{$ci}->{$mode};
+    my $res;
+    if( ref $c->config->{$ci} eq 'HASH' ) {
+        $res = $c->config->{$ci}->{$mode};
+    }
     
     return $res;
 }
@@ -55,11 +58,15 @@ sub _set_values {
 
 __END__
 
+
 =head1 NAME
+
 
 Catalyst::Plugin::Mode - select config values depends in your development process
 
+
 =head1 DESCRIPTION
+
 
 Only include the plugin in your main app module
 Sometimes you need any values for your environment(development,test,predproduction,production)
@@ -75,6 +82,7 @@ http://prod_domain.you_url/blabla
 
 You can manage this process with the plugin - in configuration only, without any calling methods
 describe some options in your config such way
+
 
 in .yml
     Catalyst::Plugin::Mode:
@@ -159,17 +167,24 @@ Available options for C<mode>:  dev|test|pred|prod
 
 =head1 METHODS
 
+
 =head2 setup
+
 
 =head1 WARRANTY
 
+
 This is free software. IT COMES WITHOUT WARRANTY OF ANY KIND.
+
 
 =head1 AUTHOR
 
- PLCGI C<plcgi1@gmail.com>
+
+PLCGI C<plcgi1 (-) gmail.com>
+
 
 =head1 LICENSE
+
 
 This library is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.

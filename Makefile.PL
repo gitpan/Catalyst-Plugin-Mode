@@ -13,7 +13,7 @@ WriteMakefile(
     }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM  => 'lib/Catalyst/Plugin/Mode.pm', # retrieve abstract from module
-       AUTHOR         => 'PLCGI <plcgi1@gmail.com>') : ()),
+       AUTHOR         => 'PLCGI <plcgi1 (-) gmail.com>') : ()),
     INC               => '-I.', # e.g., '-I. -I/usr/include/other'
 	# Un-comment this if you add C files to link with later:
     # OBJECT            => '$(O_FILES)', # link all the C files too
