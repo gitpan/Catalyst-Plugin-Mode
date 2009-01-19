@@ -1,11 +1,11 @@
 package Catalyst::Plugin::Mode;
 use strict;
-use NEXT;
+#use NEXT;
 
 our $VERSION = 0.01;
 
 sub setup {
-    my ( $c ) = @_;
+    my ( $c ) = shift;
     
     my $config = $c->config;
     my $plugin_config = $config->{'Catalyst::Plugin::Mode'};
@@ -30,11 +30,9 @@ sub setup {
         }
     }
         
-    $c->config($config);
-    
-    $c->NEXT::setup(@_);
+    $c->config($c->config,$config);
         
-    return;
+    return $c->NEXT::setup(@_);
 }
 
 sub _get_node {
@@ -58,7 +56,6 @@ sub _set_values {
 
 __END__
 
-
 =head1 NAME
 
 
@@ -71,20 +68,25 @@ Catalyst::Plugin::Mode - select config values depends in your development proces
 Only include the plugin in your main app module
 Sometimes you need any values for your environment(development,test,predproduction,production)
 
+
 For example in development you use such urls as
 http://you_url
+
 
 in test
 http://test_domain.you_url/path
 
+
 in production
 http://prod_domain.you_url/blabla
+
 
 You can manage this process with the plugin - in configuration only, without any calling methods
 describe some options in your config such way
 
 
 in .yml
+
     Catalyst::Plugin::Mode:
         keys:
             - any
@@ -113,6 +115,7 @@ in .yml
 
 
 in perl
+
 
     __YOUR_APPLICATION__->config({
         'Catalyst::Plugin::Mode' => {
@@ -148,7 +151,9 @@ in perl
         }
     });
 
+
 When you run your catalyst app, B<setup> parse config and will be
+
 
     any => {
         one_url => 'http://test_one_url',
@@ -158,9 +163,11 @@ When you run your catalyst app, B<setup> parse config and will be
         two_url => 'http://any_another_test_two_url'
     }
 
+
 In such way you can change only one value in your config - C<mode> and all urls will be as you need
 You can define valid valuev for mode for your application to ENV{APPLICATION_MODE}
 All examples in tests
+
 
 Available options for C<mode>:  dev|test|pred|prod
 
@@ -184,7 +191,6 @@ PLCGI C<plcgi1 (-) gmail.com>
 
 
 =head1 LICENSE
-
 
 This library is free software, you can redistribute it and/or modify
 it under the same terms as Perl itself.

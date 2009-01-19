@@ -9,6 +9,7 @@ WriteMakefile(
         'Catalyst' => 0,
         'Test::Strict' => 0,
         'Data::Dumper' => 0,
+	'Path::Class' => 0,
         'Test::More' => 0
     }, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
